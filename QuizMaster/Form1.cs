@@ -51,5 +51,12 @@ namespace QuizMaster
                 boxes[i].Location = shuffledPositions[i];
             }
         }
+
+        private void Answer_Click(object sender, EventArgs e)
+        {
+            Control clicked = (Control)sender;
+
+            MessageBox.Show("You clicked: " + clicked.Name);
+        }
     }
 }
