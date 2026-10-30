@@ -41,31 +41,35 @@
             this.tbxLogin = new System.Windows.Forms.TextBox();
             this.tbGame = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSquare = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
+            this.btnDiamond = new System.Windows.Forms.Button();
+            this.btnTriangle = new System.Windows.Forms.Button();
             this.lblTimer = new System.Windows.Forms.Label();
             this.lblQuestion = new System.Windows.Forms.Label();
             this.tbChooseGamemode = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tbpLeaderboard = new System.Windows.Forms.TabPage();
+            this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
+            this.tbpAdministrator = new System.Windows.Forms.TabPage();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
+            this.btnEditUser = new System.Windows.Forms.Button();
+            this.btnAddUser = new System.Windows.Forms.Button();
+            this.btnDeleteQuestion = new System.Windows.Forms.Button();
+            this.btnEditQuestion = new System.Windows.Forms.Button();
+            this.btnAddQuestion = new System.Windows.Forms.Button();
+            this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.dgvQuestions = new System.Windows.Forms.DataGridView();
             this.btnGamemodeThree = new System.Windows.Forms.Button();
             this.btnGamemodeTwo = new System.Windows.Forms.Button();
             this.btnGamemodeOne = new System.Windows.Forms.Button();
-            this.leaderboard = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tmrGame = new System.Windows.Forms.Timer(this.components);
             this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            this.btnGamemodeGames = new System.Windows.Forms.Button();
+            this.btnGamemodeStandard = new System.Windows.Forms.Button();
+            this.btnGamemodeBooks = new System.Windows.Forms.Button();
+            this.btnSkipQuestion = new System.Windows.Forms.Button();
             this.tbControl.SuspendLayout();
             this.tbRegister.SuspendLayout();
             this.tbLogin.SuspendLayout();
@@ -73,11 +77,11 @@
             this.panel1.SuspendLayout();
             this.tbChooseGamemode.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.leaderboard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tbpLeaderboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).BeginInit();
+            this.tbpAdministrator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
             this.SuspendLayout();
             // 
             // tbControl
@@ -86,8 +90,8 @@
             this.tbControl.Controls.Add(this.tbLogin);
             this.tbControl.Controls.Add(this.tbGame);
             this.tbControl.Controls.Add(this.tbChooseGamemode);
-            this.tbControl.Controls.Add(this.leaderboard);
-            this.tbControl.Controls.Add(this.tabPage2);
+            this.tbControl.Controls.Add(this.tbpLeaderboard);
+            this.tbControl.Controls.Add(this.tbpAdministrator);
             this.tbControl.Location = new System.Drawing.Point(29, 39);
             this.tbControl.Name = "tbControl";
             this.tbControl.SelectedIndex = 0;
@@ -193,10 +197,11 @@
             // 
             this.panel1.BackgroundImage = global::QuizMaster.Properties.Resources.kahootbackground;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.btnSkipQuestion);
+            this.panel1.Controls.Add(this.btnSquare);
             this.panel1.Controls.Add(this.btnCircle);
+            this.panel1.Controls.Add(this.btnDiamond);
+            this.panel1.Controls.Add(this.btnTriangle);
             this.panel1.Controls.Add(this.lblTimer);
             this.panel1.Controls.Add(this.lblQuestion);
             this.panel1.Location = new System.Drawing.Point(-4, 3);
@@ -204,64 +209,64 @@
             this.panel1.Size = new System.Drawing.Size(744, 355);
             this.panel1.TabIndex = 12;
             // 
-            // button4
+            // btnSquare
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button4.Image = global::QuizMaster.Properties.Resources.cubegreen;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(375, 251);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(350, 93);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Image = global::QuizMaster.Properties.Resources.circle;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(19, 251);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(350, 93);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Image = global::QuizMaster.Properties.Resources.cube;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(375, 152);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(350, 93);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSquare.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnSquare.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSquare.Image = global::QuizMaster.Properties.Resources.cubegreen;
+            this.btnSquare.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSquare.Location = new System.Drawing.Point(375, 251);
+            this.btnSquare.Name = "btnSquare";
+            this.btnSquare.Size = new System.Drawing.Size(350, 93);
+            this.btnSquare.TabIndex = 15;
+            this.btnSquare.Text = "button4";
+            this.btnSquare.UseVisualStyleBackColor = true;
             // 
             // btnCircle
             // 
-            this.btnCircle.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCircle.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnCircle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCircle.Image = global::QuizMaster.Properties.Resources.triangle;
+            this.btnCircle.Image = global::QuizMaster.Properties.Resources.circle;
             this.btnCircle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCircle.Location = new System.Drawing.Point(19, 152);
+            this.btnCircle.Location = new System.Drawing.Point(19, 251);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(350, 93);
-            this.btnCircle.TabIndex = 12;
-            this.btnCircle.Text = "button1";
+            this.btnCircle.TabIndex = 14;
+            this.btnCircle.Text = "button3";
             this.btnCircle.UseVisualStyleBackColor = true;
+            // 
+            // btnDiamond
+            // 
+            this.btnDiamond.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnDiamond.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDiamond.Image = global::QuizMaster.Properties.Resources.cube;
+            this.btnDiamond.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDiamond.Location = new System.Drawing.Point(375, 152);
+            this.btnDiamond.Name = "btnDiamond";
+            this.btnDiamond.Size = new System.Drawing.Size(350, 93);
+            this.btnDiamond.TabIndex = 13;
+            this.btnDiamond.Text = "button2";
+            this.btnDiamond.UseVisualStyleBackColor = true;
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTriangle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTriangle.Image = global::QuizMaster.Properties.Resources.triangle;
+            this.btnTriangle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTriangle.Location = new System.Drawing.Point(19, 152);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(350, 93);
+            this.btnTriangle.TabIndex = 12;
+            this.btnTriangle.Text = "button1";
+            this.btnTriangle.UseVisualStyleBackColor = true;
             // 
             // lblTimer
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
             this.lblTimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblTimer.Location = new System.Drawing.Point(338, 105);
+            this.lblTimer.Location = new System.Drawing.Point(338, 106);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(83, 31);
             this.lblTimer.TabIndex = 11;
@@ -293,13 +298,132 @@
             // 
             this.panel2.BackgroundImage = global::QuizMaster.Properties.Resources.kahootbackground;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.btnGamemodeThree);
-            this.panel2.Controls.Add(this.btnGamemodeTwo);
-            this.panel2.Controls.Add(this.btnGamemodeOne);
+            this.panel2.Controls.Add(this.btnGamemodeBooks);
+            this.panel2.Controls.Add(this.btnGamemodeStandard);
+            this.panel2.Controls.Add(this.btnGamemodeGames);
             this.panel2.Location = new System.Drawing.Point(6, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(724, 345);
             this.panel2.TabIndex = 0;
+            // 
+            // tbpLeaderboard
+            // 
+            this.tbpLeaderboard.Controls.Add(this.dgvLeaderboard);
+            this.tbpLeaderboard.Location = new System.Drawing.Point(4, 25);
+            this.tbpLeaderboard.Name = "tbpLeaderboard";
+            this.tbpLeaderboard.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpLeaderboard.Size = new System.Drawing.Size(736, 358);
+            this.tbpLeaderboard.TabIndex = 4;
+            this.tbpLeaderboard.Text = "leaderboard";
+            this.tbpLeaderboard.UseVisualStyleBackColor = true;
+            // 
+            // dgvLeaderboard
+            // 
+            this.dgvLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLeaderboard.Location = new System.Drawing.Point(7, 7);
+            this.dgvLeaderboard.Name = "dgvLeaderboard";
+            this.dgvLeaderboard.RowHeadersWidth = 51;
+            this.dgvLeaderboard.RowTemplate.Height = 24;
+            this.dgvLeaderboard.Size = new System.Drawing.Size(367, 348);
+            this.dgvLeaderboard.TabIndex = 0;
+            // 
+            // tbpAdministrator
+            // 
+            this.tbpAdministrator.Controls.Add(this.btnDeleteUser);
+            this.tbpAdministrator.Controls.Add(this.btnEditUser);
+            this.tbpAdministrator.Controls.Add(this.btnAddUser);
+            this.tbpAdministrator.Controls.Add(this.btnDeleteQuestion);
+            this.tbpAdministrator.Controls.Add(this.btnEditQuestion);
+            this.tbpAdministrator.Controls.Add(this.btnAddQuestion);
+            this.tbpAdministrator.Controls.Add(this.dgvUsers);
+            this.tbpAdministrator.Controls.Add(this.dgvQuestions);
+            this.tbpAdministrator.Location = new System.Drawing.Point(4, 25);
+            this.tbpAdministrator.Name = "tbpAdministrator";
+            this.tbpAdministrator.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpAdministrator.Size = new System.Drawing.Size(736, 358);
+            this.tbpAdministrator.TabIndex = 5;
+            this.tbpAdministrator.Text = "administrator";
+            this.tbpAdministrator.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Location = new System.Drawing.Point(626, 50);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteUser.TabIndex = 7;
+            this.btnDeleteUser.Text = "Delete";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
+            // 
+            // btnEditUser
+            // 
+            this.btnEditUser.Location = new System.Drawing.Point(515, 50);
+            this.btnEditUser.Name = "btnEditUser";
+            this.btnEditUser.Size = new System.Drawing.Size(75, 23);
+            this.btnEditUser.TabIndex = 6;
+            this.btnEditUser.Text = "Edit";
+            this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Location = new System.Drawing.Point(402, 50);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(75, 23);
+            this.btnAddUser.TabIndex = 5;
+            this.btnAddUser.Text = "Add";
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            // 
+            // btnDeleteQuestion
+            // 
+            this.btnDeleteQuestion.Location = new System.Drawing.Point(250, 50);
+            this.btnDeleteQuestion.Name = "btnDeleteQuestion";
+            this.btnDeleteQuestion.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteQuestion.TabIndex = 4;
+            this.btnDeleteQuestion.Text = "Delete";
+            this.btnDeleteQuestion.UseVisualStyleBackColor = true;
+            this.btnDeleteQuestion.Click += new System.EventHandler(this.btnDeleteQuestion_Click);
+            // 
+            // btnEditQuestion
+            // 
+            this.btnEditQuestion.Location = new System.Drawing.Point(141, 50);
+            this.btnEditQuestion.Name = "btnEditQuestion";
+            this.btnEditQuestion.Size = new System.Drawing.Size(75, 23);
+            this.btnEditQuestion.TabIndex = 3;
+            this.btnEditQuestion.Text = "Edit";
+            this.btnEditQuestion.UseVisualStyleBackColor = true;
+            this.btnEditQuestion.Click += new System.EventHandler(this.btnEditQuestion_Click);
+            // 
+            // btnAddQuestion
+            // 
+            this.btnAddQuestion.Location = new System.Drawing.Point(43, 50);
+            this.btnAddQuestion.Name = "btnAddQuestion";
+            this.btnAddQuestion.Size = new System.Drawing.Size(75, 23);
+            this.btnAddQuestion.TabIndex = 2;
+            this.btnAddQuestion.Text = "Add";
+            this.btnAddQuestion.UseVisualStyleBackColor = true;
+            this.btnAddQuestion.Click += new System.EventHandler(this.btnAddQuestion_Click);
+            // 
+            // dgvUsers
+            // 
+            this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsers.Location = new System.Drawing.Point(379, 95);
+            this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.RowHeadersWidth = 51;
+            this.dgvUsers.RowTemplate.Height = 24;
+            this.dgvUsers.Size = new System.Drawing.Size(351, 257);
+            this.dgvUsers.TabIndex = 1;
+            // 
+            // dgvQuestions
+            // 
+            this.dgvQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQuestions.Location = new System.Drawing.Point(6, 95);
+            this.dgvQuestions.Name = "dgvQuestions";
+            this.dgvQuestions.RowHeadersWidth = 51;
+            this.dgvQuestions.RowTemplate.Height = 24;
+            this.dgvQuestions.Size = new System.Drawing.Size(351, 257);
+            this.dgvQuestions.TabIndex = 0;
             // 
             // btnGamemodeThree
             // 
@@ -310,7 +434,6 @@
             this.btnGamemodeThree.TabIndex = 2;
             this.btnGamemodeThree.Text = "Books";
             this.btnGamemodeThree.UseVisualStyleBackColor = true;
-            this.btnGamemodeThree.Click += new System.EventHandler(this.btnGamemodeThree_Click);
             // 
             // btnGamemodeTwo
             // 
@@ -321,7 +444,6 @@
             this.btnGamemodeTwo.TabIndex = 1;
             this.btnGamemodeTwo.Text = "Games";
             this.btnGamemodeTwo.UseVisualStyleBackColor = true;
-            this.btnGamemodeTwo.Click += new System.EventHandler(this.btnGamemodeTwo_Click);
             // 
             // btnGamemodeOne
             // 
@@ -332,66 +454,6 @@
             this.btnGamemodeOne.TabIndex = 0;
             this.btnGamemodeOne.Text = "Standard";
             this.btnGamemodeOne.UseVisualStyleBackColor = true;
-            this.btnGamemodeOne.Click += new System.EventHandler(this.btnGamemodeOne_Click);
-            // 
-            // leaderboard
-            // 
-            this.leaderboard.Controls.Add(this.dataGridView1);
-            this.leaderboard.Location = new System.Drawing.Point(4, 25);
-            this.leaderboard.Name = "leaderboard";
-            this.leaderboard.Padding = new System.Windows.Forms.Padding(3);
-            this.leaderboard.Size = new System.Drawing.Size(736, 358);
-            this.leaderboard.TabIndex = 4;
-            this.leaderboard.Text = "leaderboard";
-            this.leaderboard.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 7);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(367, 348);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.button9);
-            this.tabPage2.Controls.Add(this.button8);
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.dataGridView3);
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(736, 358);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "administrator";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(379, 95);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersWidth = 51;
-            this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(351, 257);
-            this.dataGridView3.TabIndex = 1;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 95);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(351, 257);
-            this.dataGridView2.TabIndex = 0;
             // 
             // tmrGame
             // 
@@ -404,60 +466,6 @@
             this.mySqlDataAdapter1.SelectCommand = null;
             this.mySqlDataAdapter1.UpdateCommand = null;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(43, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(141, 50);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Edit";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(250, 50);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "Delete";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(402, 50);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "Add";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(515, 50);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 6;
-            this.button8.Text = "Edit";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(626, 50);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 7;
-            this.button9.Text = "Delete";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
             // mySqlCommand1
             // 
             this.mySqlCommand1.CacheAge = 0;
@@ -465,11 +473,53 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
+            // btnGamemodeGames
+            // 
+            this.btnGamemodeGames.Location = new System.Drawing.Point(98, 45);
+            this.btnGamemodeGames.Name = "btnGamemodeGames";
+            this.btnGamemodeGames.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeGames.TabIndex = 0;
+            this.btnGamemodeGames.Text = "Games";
+            this.btnGamemodeGames.UseVisualStyleBackColor = true;
+            this.btnGamemodeGames.Click += new System.EventHandler(this.btnGamemodeGames_Click_1);
+            // 
+            // btnGamemodeStandard
+            // 
+            this.btnGamemodeStandard.Location = new System.Drawing.Point(275, 45);
+            this.btnGamemodeStandard.Name = "btnGamemodeStandard";
+            this.btnGamemodeStandard.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeStandard.TabIndex = 1;
+            this.btnGamemodeStandard.Text = "Standard";
+            this.btnGamemodeStandard.UseVisualStyleBackColor = true;
+            this.btnGamemodeStandard.Click += new System.EventHandler(this.btnGamemodeStandard_Click);
+            // 
+            // btnGamemodeBooks
+            // 
+            this.btnGamemodeBooks.Location = new System.Drawing.Point(461, 45);
+            this.btnGamemodeBooks.Name = "btnGamemodeBooks";
+            this.btnGamemodeBooks.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeBooks.TabIndex = 2;
+            this.btnGamemodeBooks.Text = "Books";
+            this.btnGamemodeBooks.UseVisualStyleBackColor = true;
+            this.btnGamemodeBooks.Click += new System.EventHandler(this.btnGamemodeBooks_Click);
+            // 
+            // btnSkipQuestion
+            // 
+            this.btnSkipQuestion.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
+            this.btnSkipQuestion.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnSkipQuestion.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSkipQuestion.Location = new System.Drawing.Point(625, 100);
+            this.btnSkipQuestion.Name = "btnSkipQuestion";
+            this.btnSkipQuestion.Size = new System.Drawing.Size(100, 37);
+            this.btnSkipQuestion.TabIndex = 16;
+            this.btnSkipQuestion.Text = "Skip";
+            this.btnSkipQuestion.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(640, 360);
             this.Controls.Add(this.tbControl);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -484,11 +534,11 @@
             this.panel1.PerformLayout();
             this.tbChooseGamemode.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.leaderboard.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tbpLeaderboard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).EndInit();
+            this.tbpAdministrator.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -510,28 +560,32 @@
         private System.Windows.Forms.Timer tmrGame;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSquare;
         private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.Button btnDiamond;
+        private System.Windows.Forms.Button btnTriangle;
         private System.Windows.Forms.TabPage tbChooseGamemode;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnGamemodeThree;
         private System.Windows.Forms.Button btnGamemodeTwo;
         private System.Windows.Forms.Button btnGamemodeOne;
-        private System.Windows.Forms.TabPage leaderboard;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TabPage tbpLeaderboard;
+        private System.Windows.Forms.TabPage tbpAdministrator;
+        private System.Windows.Forms.DataGridView dgvLeaderboard;
+        private System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.DataGridView dgvQuestions;
         private MySql.Data.MySqlClient.MySqlDataAdapter mySqlDataAdapter1;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDeleteUser;
+        private System.Windows.Forms.Button btnEditUser;
+        private System.Windows.Forms.Button btnAddUser;
+        private System.Windows.Forms.Button btnDeleteQuestion;
+        private System.Windows.Forms.Button btnEditQuestion;
+        private System.Windows.Forms.Button btnAddQuestion;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
+        private System.Windows.Forms.Button btnGamemodeBooks;
+        private System.Windows.Forms.Button btnGamemodeStandard;
+        private System.Windows.Forms.Button btnGamemodeGames;
+        private System.Windows.Forms.Button btnSkipQuestion;
     }
 }
 
