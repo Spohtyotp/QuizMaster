@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblPlayerName = new System.Windows.Forms.Label();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.cbxIsAdmin = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.cbxIsAdmin = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblPlayerName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,30 +53,28 @@
             this.panel1.Size = new System.Drawing.Size(357, 396);
             this.panel1.TabIndex = 1;
             // 
-            // lblPlayerName
+            // button1
             // 
-            this.lblPlayerName.AutoSize = true;
-            this.lblPlayerName.Location = new System.Drawing.Point(135, 40);
-            this.lblPlayerName.Name = "lblPlayerName";
-            this.lblPlayerName.Size = new System.Drawing.Size(83, 16);
-            this.lblPlayerName.TabIndex = 0;
-            this.lblPlayerName.Text = "Player name";
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(135, 331);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 42);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // lblPassword
+            // cbxIsAdmin
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(137, 109);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(67, 16);
-            this.lblPassword.TabIndex = 1;
-            this.lblPassword.Text = "Password";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(124, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 2;
+            this.cbxIsAdmin.AutoSize = true;
+            this.cbxIsAdmin.BackColor = System.Drawing.Color.Transparent;
+            this.cbxIsAdmin.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.cbxIsAdmin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cbxIsAdmin.Location = new System.Drawing.Point(114, 290);
+            this.cbxIsAdmin.Name = "cbxIsAdmin";
+            this.cbxIsAdmin.Size = new System.Drawing.Size(138, 35);
+            this.cbxIsAdmin.TabIndex = 4;
+            this.cbxIsAdmin.Text = "is Admin";
+            this.cbxIsAdmin.UseVisualStyleBackColor = false;
             // 
             // textBox2
             // 
@@ -85,24 +83,36 @@
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 3;
             // 
-            // cbxIsAdmin
+            // textBox1
             // 
-            this.cbxIsAdmin.AutoSize = true;
-            this.cbxIsAdmin.Location = new System.Drawing.Point(133, 234);
-            this.cbxIsAdmin.Name = "cbxIsAdmin";
-            this.cbxIsAdmin.Size = new System.Drawing.Size(80, 20);
-            this.cbxIsAdmin.TabIndex = 4;
-            this.cbxIsAdmin.Text = "is Admin";
-            this.cbxIsAdmin.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(124, 70);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 2;
             // 
-            // button1
+            // lblPassword
             // 
-            this.button1.Location = new System.Drawing.Point(138, 294);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.BackColor = System.Drawing.Color.Transparent;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.lblPassword.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblPassword.Location = new System.Drawing.Point(118, 111);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(124, 31);
+            this.lblPassword.TabIndex = 1;
+            this.lblPassword.Text = "Password";
+            // 
+            // lblPlayerName
+            // 
+            this.lblPlayerName.AutoSize = true;
+            this.lblPlayerName.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayerName.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.lblPlayerName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblPlayerName.Location = new System.Drawing.Point(96, 36);
+            this.lblPlayerName.Name = "lblPlayerName";
+            this.lblPlayerName.Size = new System.Drawing.Size(156, 31);
+            this.lblPlayerName.TabIndex = 0;
+            this.lblPlayerName.Text = "Player name";
             // 
             // addUserForm
             // 

@@ -237,7 +237,7 @@ namespace QuizMaster
             currentTime = gameTime;
             questionTime = 5;
             hasSkipped = false;
-            //btnSkipQuestion.Visible = true;
+            btnSkipQuestion.Visible = true;
 
             DisplayQuestion();
             tmrGame.Start();
@@ -260,12 +260,12 @@ namespace QuizMaster
 
         private void GamemodeGames()
         {
-            currentQuestions = questionList.ToList();
+            currentQuestions = questionList.Where(q => q.GetCategory() == "Games").ToList();
         }
 
         private void GamemodeStandard()
         {
-            currentQuestions = questionList.Where(q => q.GetCategory() == "Games").ToList();
+            currentQuestions = questionList.ToList();
         }
 
         private void GamemodeBooks()
@@ -477,7 +477,32 @@ namespace QuizMaster
             }
         }
 
+        private void btnSkipQuestion_Click(object sender, EventArgs e)
+        {
+            if (hasSkipped)
+            {
+                MessageBox.Show("You can only skip one question per match.");
+                return;
+            }
 
+            hasSkipped = true;
+
+            currentQuestion++;
+
+            if (currentQuestion < currentQuestions.Count)
+            {
+                questionTime = 5;
+                DisplayQuestion();
+            }
+            else
+            {
+                tmrGame.Stop();
+                SaveScore();
+                MessageBox.Show("Quiz Completed!");
+            }
+
+            btnSkipQuestion.Enabled = false;
+        }
 
         private void LoadQuestions()
         {
@@ -572,5 +597,7 @@ namespace QuizMaster
         {
 
         }
+
+       
     }
 }

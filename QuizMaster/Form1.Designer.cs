@@ -41,6 +41,7 @@
             this.tbxLogin = new System.Windows.Forms.TextBox();
             this.tbGame = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSkipQuestion = new System.Windows.Forms.Button();
             this.btnSquare = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
             this.btnDiamond = new System.Windows.Forms.Button();
@@ -49,6 +50,9 @@
             this.lblQuestion = new System.Windows.Forms.Label();
             this.tbChooseGamemode = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnGamemodeBooks = new System.Windows.Forms.Button();
+            this.btnGamemodeStandard = new System.Windows.Forms.Button();
+            this.btnGamemodeGames = new System.Windows.Forms.Button();
             this.tbpLeaderboard = new System.Windows.Forms.TabPage();
             this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
             this.tbpAdministrator = new System.Windows.Forms.TabPage();
@@ -66,10 +70,6 @@
             this.tmrGame = new System.Windows.Forms.Timer(this.components);
             this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.btnGamemodeGames = new System.Windows.Forms.Button();
-            this.btnGamemodeStandard = new System.Windows.Forms.Button();
-            this.btnGamemodeBooks = new System.Windows.Forms.Button();
-            this.btnSkipQuestion = new System.Windows.Forms.Button();
             this.tbControl.SuspendLayout();
             this.tbRegister.SuspendLayout();
             this.tbLogin.SuspendLayout();
@@ -209,6 +209,19 @@
             this.panel1.Size = new System.Drawing.Size(744, 355);
             this.panel1.TabIndex = 12;
             // 
+            // btnSkipQuestion
+            // 
+            this.btnSkipQuestion.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
+            this.btnSkipQuestion.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnSkipQuestion.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSkipQuestion.Location = new System.Drawing.Point(625, 100);
+            this.btnSkipQuestion.Name = "btnSkipQuestion";
+            this.btnSkipQuestion.Size = new System.Drawing.Size(100, 37);
+            this.btnSkipQuestion.TabIndex = 16;
+            this.btnSkipQuestion.Text = "Skip";
+            this.btnSkipQuestion.UseVisualStyleBackColor = true;
+            this.btnSkipQuestion.Click += new System.EventHandler(this.btnSkipQuestion_Click);
+            // 
             // btnSquare
             // 
             this.btnSquare.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
@@ -305,6 +318,36 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(724, 345);
             this.panel2.TabIndex = 0;
+            // 
+            // btnGamemodeBooks
+            // 
+            this.btnGamemodeBooks.Location = new System.Drawing.Point(461, 45);
+            this.btnGamemodeBooks.Name = "btnGamemodeBooks";
+            this.btnGamemodeBooks.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeBooks.TabIndex = 2;
+            this.btnGamemodeBooks.Text = "Books";
+            this.btnGamemodeBooks.UseVisualStyleBackColor = true;
+            this.btnGamemodeBooks.Click += new System.EventHandler(this.btnGamemodeBooks_Click);
+            // 
+            // btnGamemodeStandard
+            // 
+            this.btnGamemodeStandard.Location = new System.Drawing.Point(275, 45);
+            this.btnGamemodeStandard.Name = "btnGamemodeStandard";
+            this.btnGamemodeStandard.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeStandard.TabIndex = 1;
+            this.btnGamemodeStandard.Text = "Standard";
+            this.btnGamemodeStandard.UseVisualStyleBackColor = true;
+            this.btnGamemodeStandard.Click += new System.EventHandler(this.btnGamemodeStandard_Click);
+            // 
+            // btnGamemodeGames
+            // 
+            this.btnGamemodeGames.Location = new System.Drawing.Point(98, 45);
+            this.btnGamemodeGames.Name = "btnGamemodeGames";
+            this.btnGamemodeGames.Size = new System.Drawing.Size(128, 43);
+            this.btnGamemodeGames.TabIndex = 0;
+            this.btnGamemodeGames.Text = "Games";
+            this.btnGamemodeGames.UseVisualStyleBackColor = true;
+            this.btnGamemodeGames.Click += new System.EventHandler(this.btnGamemodeGames_Click_1);
             // 
             // tbpLeaderboard
             // 
@@ -473,53 +516,11 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // btnGamemodeGames
-            // 
-            this.btnGamemodeGames.Location = new System.Drawing.Point(98, 45);
-            this.btnGamemodeGames.Name = "btnGamemodeGames";
-            this.btnGamemodeGames.Size = new System.Drawing.Size(128, 43);
-            this.btnGamemodeGames.TabIndex = 0;
-            this.btnGamemodeGames.Text = "Games";
-            this.btnGamemodeGames.UseVisualStyleBackColor = true;
-            this.btnGamemodeGames.Click += new System.EventHandler(this.btnGamemodeGames_Click_1);
-            // 
-            // btnGamemodeStandard
-            // 
-            this.btnGamemodeStandard.Location = new System.Drawing.Point(275, 45);
-            this.btnGamemodeStandard.Name = "btnGamemodeStandard";
-            this.btnGamemodeStandard.Size = new System.Drawing.Size(128, 43);
-            this.btnGamemodeStandard.TabIndex = 1;
-            this.btnGamemodeStandard.Text = "Standard";
-            this.btnGamemodeStandard.UseVisualStyleBackColor = true;
-            this.btnGamemodeStandard.Click += new System.EventHandler(this.btnGamemodeStandard_Click);
-            // 
-            // btnGamemodeBooks
-            // 
-            this.btnGamemodeBooks.Location = new System.Drawing.Point(461, 45);
-            this.btnGamemodeBooks.Name = "btnGamemodeBooks";
-            this.btnGamemodeBooks.Size = new System.Drawing.Size(128, 43);
-            this.btnGamemodeBooks.TabIndex = 2;
-            this.btnGamemodeBooks.Text = "Books";
-            this.btnGamemodeBooks.UseVisualStyleBackColor = true;
-            this.btnGamemodeBooks.Click += new System.EventHandler(this.btnGamemodeBooks_Click);
-            // 
-            // btnSkipQuestion
-            // 
-            this.btnSkipQuestion.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
-            this.btnSkipQuestion.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnSkipQuestion.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSkipQuestion.Location = new System.Drawing.Point(625, 100);
-            this.btnSkipQuestion.Name = "btnSkipQuestion";
-            this.btnSkipQuestion.Size = new System.Drawing.Size(100, 37);
-            this.btnSkipQuestion.TabIndex = 16;
-            this.btnSkipQuestion.Text = "Skip";
-            this.btnSkipQuestion.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 360);
+            this.ClientSize = new System.Drawing.Size(803, 449);
             this.Controls.Add(this.tbControl);
             this.Name = "Form1";
             this.Text = "Form1";
