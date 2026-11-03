@@ -51,7 +51,7 @@ namespace QuizMaster
             tabAdministrator = tbControl.TabPages["tbpAdministrator"];
 
             // Hide tabs that should only appear after login
-            tbControl.TabPages.Remove(tabGame);
+            // tbControl.TabPages.Remove(tabGame);
             tbControl.TabPages.Remove(tabLeaderboard);
             tbControl.TabPages.Remove(tabAdministrator);
 
