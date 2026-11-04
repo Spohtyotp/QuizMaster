@@ -1,10 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
-using MySql.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +20,11 @@ namespace QuizMaster
         int row = 0;
         int score = 0;
         bool hasSkipped = false;
+        bool hasUsed5050 = false;
+        bool isSpecialQuestion = false;
+        int specialQuestionIndex = 0;
+        int bonusPoints = 5;
+        int currentQuestion = 0;
 
         Question question = null;
         List<Question> questionList = null;
@@ -30,13 +33,13 @@ namespace QuizMaster
         TabPage tabLogin;
         TabPage tabRegister;
         TabPage tabGame;
+        TabPage tabGamemode;
         TabPage tabLeaderboard;
         TabPage tabAdministrator;
-
         Random random = new Random();
-        int currentQuestion = 0;
-
+       
         string connectionString = @"Data Source = localhost;Initial Catalog=quizmaster; User Id=root;password=''";
+
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace QuizMaster
             tabLogin = tbControl.TabPages["tbpLogin"];
             tabRegister = tbControl.TabPages["tbpRegister"];
             tabGame = tbControl.TabPages["tbpGame"];
+            tabGamemode = tbControl.TabPages["tbpChooseGamemode"];
             tabLeaderboard = tbControl.TabPages["tbpLeaderboard"];
             tabAdministrator = tbControl.TabPages["tbpAdministrator"];
 
@@ -54,9 +58,11 @@ namespace QuizMaster
             // tbControl.TabPages.Remove(tabGame);
             tbControl.TabPages.Remove(tabLeaderboard);
             tbControl.TabPages.Remove(tabAdministrator);
+            tbControl.TabPages.Remove(tabGamemode);
+            tbControl.TabPages.Remove(tabGame);
 
-            // Start on the Login tab
-            tbControl.SelectedTab = tabLogin;
+            // Start on the Register tab
+            tbControl.SelectedTab = tabRegister;
 
             // Keep your existing timer and answer button setup
             tmrGame.Interval = 1000;
@@ -129,7 +135,8 @@ namespace QuizMaster
                             }
 
 
-
+                            this.ClientSize = new Size(600, 350);
+                            this.CenterToScreen();
                             // Open the Game tab
                             tbControl.SelectedTab = tabGame;
 
@@ -201,7 +208,6 @@ namespace QuizMaster
             GetAllQuestions();
             GamemodeGames();
             StartQuiz(); ;
-
         }
 
         private void btnGamemodeStandard_Click(object sender, EventArgs e)
@@ -211,7 +217,6 @@ namespace QuizMaster
             GetAllQuestions();
             GamemodeStandard();
             StartQuiz();
-
         }
 
         private void btnGamemodeBooks_Click(object sender, EventArgs e)
@@ -221,7 +226,11 @@ namespace QuizMaster
             GamemodeBooks();
             StartQuiz();
         }
-
+        private void btnGameModeSpecial_Click(object sender, EventArgs e)
+        {
+            SpecialQuiz specialQuizForm = new SpecialQuiz(tbxLogin.Text.Trim());
+            specialQuizForm.ShowDialog();
+        }
         private void StartQuiz()
         {
             if (currentQuestions == null || currentQuestions.Count == 0)
@@ -321,40 +330,45 @@ namespace QuizMaster
 
         private void DisplayQuestion()
         {
-            //get the current question
-            Question q = currentQuestions[currentQuestion];
-
-            //display teh question
-            lblQuestion.Text = q.GetQuestion();
-
-            //Put all 4 answers into a list
-            List<string> answers = new List<string>
+            if (currentQuestions == null || currentQuestions.Count == 0)
             {
-                q.GetCorrectAnswer(),
-                q.GetFalseAnswerOne(),
-                q.GetFalseAnswerTwo(),
-                q.GetFalseAnswerThree(),
-            };
-
-            //Shuffle all the answers 
-            for (int i = answers.Count - 1; i > 0; i--)
-            {
-                int j = random.Next(i + 1);
-
-                string temp = answers[i];
-                answers[i] = answers[j];
-                answers[j] = temp;
+                MessageBox.Show("No Questions available!");
+                return;
             }
 
-            //Assign the shuffles answers to the buttons
-            btnTriangle.Text = answers[0];
-            btnDiamond.Text = answers[1];
-            btnSquare.Text = answers[2];
-            btnCircle.Text = answers[3];
+            ShuffleList();
+
+            currentQuestion = 0;
+            isSpecialQuestion = false;
+
+            // Randomly choose a special question from the first 20 questions
+            int questionsToChooseFrom = Math.Min(20, currentQuestions.Count);
+            specialQuestionIndex = random.Next(questionsToChooseFrom);
+
+            score = 0;
+            currentTime = gameTime;
+            questionTime = 5;
+            hasSkipped = false;
+
+            hasUsed5050 = false;
+            btn5050.Enabled = true;
+            btnSkipQuestion.Visible = true;
+            btnSkipQuestion.Enabled = true;
+
+            // Reset both timer labels
+            lblTimer.ForeColor = Color.White;
+            lblQuestionTime.ForeColor = Color.White;
+
+            lblTimer.Text = "Time: " + currentTime;
+            lblQuestionTime.Text = "Question time: " + questionTime;
+
+            DisplayQuestion();
+            tmrGame.Start();
         }
 
         private void CheckAnswer(object sender, EventArgs e)
         {
+            tmrGame.Stop();
             Button clickedButton = sender as Button;
 
             //Get the correct answer for this question
@@ -379,6 +393,7 @@ namespace QuizMaster
             {
                 questionTime = 5;
                 DisplayQuestion();
+                tmrGame.Start();
             }
             else
             {
@@ -465,6 +480,13 @@ namespace QuizMaster
 
         private void tbControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (tbControl.SelectedTab == tabLogin ||
+                tbControl.SelectedTab == tabRegister)
+            {
+                this.ClientSize = new Size(300, 350);
+                this.CenterToScreen();
+            }
+
             if (tbControl.SelectedTab == tabLeaderboard)
             {
                 LoadLeaderboard();
@@ -564,40 +586,197 @@ namespace QuizMaster
             lblTimer.Text = "Time: " + gameTime;
 
             // Set the form size to the game mode selection size
-            this.ClientSize = new Size(390, 383);
+            this.ClientSize = new Size(600, 300);
             this.CenterToScreen();
         }
 
         private void btnAddQuestion_Click(object sender, EventArgs e)
         {
+            AddQuestionForm addQuestionForm = new AddQuestionForm();
 
+            addQuestionForm.ShowDialog();
+
+            LoadQuestions();
         }
 
         private void btnEditQuestion_Click(object sender, EventArgs e)
         {
 
+            if (dgvQuestions.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a question to edit.");
+                return;
+            }
+
+            int questionId = Convert.ToInt32(
+                dgvQuestions.SelectedRows[0].Cells["QuestionID"].Value
+            );
+
+            editQuestionForm form = new editQuestionForm(questionId);
+            form.ShowDialog();
+
+            LoadQuestions();
         }
 
         private void btnDeleteQuestion_Click(object sender, EventArgs e)
         {
+            if (dgvQuestions.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a question to delete.");
+                return;
+            }
 
+            int questionId = Convert.ToInt32(
+                dgvQuestions.SelectedRows[0].Cells["QuestionID"].Value
+            );
+
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this question?",
+                "Delete Question",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM Questions WHERE QuestionID = @QuestionID";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@QuestionID", questionId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("Question deleted successfully!");
+
+            LoadQuestions();
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
+            addUserForm form = new addUserForm();
+            form.ShowDialog();
 
+            LoadUsers();
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
+            if (dgvUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a user to edit.");
+                return;
+            }
 
+            int playerId = Convert.ToInt32(
+                dgvUsers.SelectedRows[0].Cells["PlayerID"].Value
+            );
+
+            editUserForm form = new editUserForm(playerId);
+            form.ShowDialog();
+
+            LoadUsers();
         }
-
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
+            if (dgvUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a user to delete.");
+                return;
+            }
 
+            int playerId = Convert.ToInt32(
+                dgvUsers.SelectedRows[0].Cells["PlayerID"].Value
+            );
+
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this user?",
+                "Delete User",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            using (MySqlConnection conn =
+                new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query =
+                    "DELETE FROM login WHERE PlayerID = @PlayerID";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@PlayerID", playerId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("User deleted successfully!");
+            LoadUsers();
         }
 
-       
+        private void btn5050_Click(object sender, EventArgs e)
+        {
+
+            // Check if the joker has already been used
+            if (hasUsed5050)
+            {
+                return;
+            }
+
+            // Get the correct answer
+            string correctAnswer =
+                currentQuestions[currentQuestion].GetCorrectAnswer();
+
+            // Put all four answer buttons into a list
+            List<Button> answerButtons = new List<Button>
+            {
+                btnTriangle,
+                btnCircle,
+                btnDiamond,
+                btnSquare
+            };
+
+            // Find the button containing the correct answer
+            Button correctButton = answerButtons.First(
+                b => b.Text == correctAnswer
+            );
+
+            // Find all buttons containing incorrect answers
+            List<Button> incorrectButtons = answerButtons
+                .Where(b => b.Text != correctAnswer)
+                .ToList();
+
+            // Randomly choose one incorrect answer to keep
+            int randomIndex = random.Next(incorrectButtons.Count);
+            Button incorrectButton = incorrectButtons[randomIndex];
+
+            // Disable the other two incorrect answers
+            foreach (Button button in incorrectButtons)
+            {
+                if (button != incorrectButton)
+                {
+                    button.Enabled = false;
+                }
+            }
+
+            // Mark the joker as used
+            hasUsed5050 = true;
+            btn5050.Enabled = false;
+        }
     }
 }

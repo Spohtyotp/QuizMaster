@@ -31,8 +31,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.cbxIsAdmin = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbPassword = new System.Windows.Forms.TextBox();
+            this.txbUsername = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -44,8 +44,8 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.cbxIsAdmin);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txbPassword);
+            this.panel1.Controls.Add(this.txbUsername);
             this.panel1.Controls.Add(this.lblPassword);
             this.panel1.Controls.Add(this.lblPlayerName);
             this.panel1.Location = new System.Drawing.Point(31, 22);
@@ -76,19 +76,19 @@
             this.cbxIsAdmin.Text = "is Admin";
             this.cbxIsAdmin.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // txbPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(124, 145);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 3;
+            this.txbPassword.Location = new System.Drawing.Point(124, 145);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.Size = new System.Drawing.Size(100, 22);
+            this.txbPassword.TabIndex = 3;
             // 
-            // textBox1
+            // txbUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(124, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 2;
+            this.txbUsername.Location = new System.Drawing.Point(124, 70);
+            this.txbUsername.Name = "txbUsername";
+            this.txbUsername.Size = new System.Drawing.Size(100, 22);
+            this.txbUsername.TabIndex = 2;
             // 
             // lblPassword
             // 
@@ -122,6 +122,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "addUserForm";
             this.Text = "addUserForm";
+//            this.Load += new System.EventHandler(this.addUserForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -134,8 +135,8 @@
         private System.Windows.Forms.Label lblPlayerName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox cbxIsAdmin;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbPassword;
+        private System.Windows.Forms.TextBox txbUsername;
         private System.Windows.Forms.Label lblPassword;
     }
 }
