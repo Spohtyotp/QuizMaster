@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace QuizMaster
 {
@@ -12,12 +15,12 @@ namespace QuizMaster
     {
         int currentTime = 0;
         int score = 0;
+        int row = 0;
         string playerName;
 
         const int questionsToWin = 10;
         const int penaltySeconds = 5;
         DataTable dataTable = null;
-        int row = 0;
 
         Question question = null;
         List<Question> questionList = null;
@@ -35,10 +38,10 @@ namespace QuizMaster
 
             tmrGame.Interval = 1000;
 
-            btnTriangle.Click += CheckAnswer;
-            btnCircle.Click += CheckAnswer;
-            btnDiamond.Click += CheckAnswer;
-            btnSquare.Click += CheckAnswer;
+            btnAnswerOne.Click += CheckAnswer;
+            btnAnswerTwo.Click += CheckAnswer;
+            btnAnswerThree.Click += CheckAnswer;
+            btnAnswerFour.Click += CheckAnswer;
         }
         private void SpecialQuiz_Load(object sender, EventArgs e)
         {
@@ -157,13 +160,13 @@ namespace QuizMaster
             }
 
             //Assign the shuffles answers to the buttons
-            btnTriangle.Text = answers[0];
-            btnCircle.Text = answers[1];
-            btnDiamond.Text = answers[2];
-            btnSquare.Text = answers[3];
+            btnAnswerOne.Text = answers[0];
+            btnAnswerTwo.Text = answers[1];
+            btnAnswerThree.Text = answers[2];
+            btnAnswerFour.Text = answers[3];
         }
 
-        private void tmr_Tick(object sender, EventArgs e)
+        private void tmrGame_Tick(object sender, EventArgs e)
         {
             currentTime++;
 
@@ -229,6 +232,7 @@ namespace QuizMaster
                 {
                     object result = cmd.ExecuteScalar();
 
+                    //check if there is a previous fastest time
                     if (result != DBNull.Value)
                     {
                         fastestTime = Convert.ToInt32(result);
@@ -257,6 +261,7 @@ namespace QuizMaster
                 "Quiz completed!\n\n" +
                 "Your time: " + playerTime.ToString(@"mm\:ss");
 
+            // Check if the player achieved the fastest time
             if (fastestTime == null || currentTime < fastestTime.Value)
             {
                 message += "\n\nCongratulations! You achieved the fastest time ever!";

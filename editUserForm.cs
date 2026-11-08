@@ -48,10 +48,10 @@ namespace QuizMaster
                     {
                         if (reader.Read())
                         {
-                            tbxPlayerName.Text =
+                            txtUsername.Text =
                                 reader["PlayerName"].ToString();
 
-                            tbxPassword.Text = reader["Password"].ToString();
+                            txtPassword.Text =reader["Password"].ToString();
 
                             cbxIsAdmin.Checked =
                                 Convert.ToBoolean(reader["IsAdmin"]);
@@ -67,9 +67,9 @@ namespace QuizMaster
             }
         }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbxPlayerName.Text))
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("Please enter a username.");
                 return;
@@ -82,7 +82,7 @@ namespace QuizMaster
 
                 string query;
 
-                if (string.IsNullOrWhiteSpace(tbxPassword.Text))
+                if (string.IsNullOrWhiteSpace(txtPassword.Text))
                 {
                     query =
                         "UPDATE login SET " +
@@ -103,10 +103,10 @@ namespace QuizMaster
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue(
-                        "@PlayerName", tbxPlayerName.Text.Trim().ToLower());
+                        "@PlayerName", txtUsername.Text.Trim().ToLower());
 
                     cmd.Parameters.AddWithValue(
-                       "@Password", tbxPassword.Text);
+                       "@Password", txtPassword.Text);
 
                     cmd.Parameters.AddWithValue(
                         "@IsAdmin", cbxIsAdmin.Checked);
@@ -114,10 +114,10 @@ namespace QuizMaster
                     cmd.Parameters.AddWithValue(
                         "@PlayerID", playerId);
 
-                    if (!string.IsNullOrWhiteSpace(tbxPassword.Text))
+                    if (!string.IsNullOrWhiteSpace(txtPassword.Text))
                     {
                         cmd.Parameters.AddWithValue(
-                            "@Password", tbxPassword.Text);
+                            "@Password", txtPassword.Text);
                     }
 
                     cmd.ExecuteNonQuery();

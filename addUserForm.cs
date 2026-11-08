@@ -21,8 +21,8 @@ namespace QuizMaster
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txbUsername.Text) ||
-               string.IsNullOrWhiteSpace(txbPassword.Text))
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
+               string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("Please enter a username and password.");
                 return;
@@ -40,10 +40,10 @@ namespace QuizMaster
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue(
-                        "@PlayerName", txbUsername.Text.Trim().ToLower());
+                        "@PlayerName", txtUsername.Text.Trim().ToLower());
 
                     cmd.Parameters.AddWithValue(
-                        "@Password", txbPassword.Text);
+                        "@Password", txtPassword.Text);
 
                     cmd.Parameters.AddWithValue(
                         "@IsAdmin", cbxIsAdmin.Checked);

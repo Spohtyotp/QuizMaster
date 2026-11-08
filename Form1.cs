@@ -1,11 +1,14 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using MySql.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,16 +19,17 @@ namespace QuizMaster
         int gameTime = 60;
         int currentTime = 0;
         int questionTime = 5;
-        DataTable dataTable = null;
         int row = 0;
         int score = 0;
-        bool hasSkipped = false;
-        bool hasUsed5050 = false;
-        bool isSpecialQuestion = false;
         int specialQuestionIndex = 0;
         int bonusPoints = 5;
         int currentQuestion = 0;
 
+        bool hasSkipped = false;
+        bool hasUsedFiftyFifty = false;
+        bool isSpecialQuestion = false;
+
+        DataTable dataTable = null;
         Question question = null;
         List<Question> questionList = null;
         List<Question> currentQuestions = null;
@@ -33,13 +37,12 @@ namespace QuizMaster
         TabPage tabLogin;
         TabPage tabRegister;
         TabPage tabGame;
-        TabPage tabGamemode;
         TabPage tabLeaderboard;
         TabPage tabAdministrator;
-        Random random = new Random();
-       
-        string connectionString = @"Data Source = localhost;Initial Catalog=quizmaster; User Id=root;password=''";
 
+        Random random = new Random();
+
+        string connectionString = @"Data Source = localhost;Initial Catalog=quizmaster; User Id=root;password=''";
         public Form1()
         {
             InitializeComponent();
@@ -50,33 +53,42 @@ namespace QuizMaster
             tabLogin = tbControl.TabPages["tbpLogin"];
             tabRegister = tbControl.TabPages["tbpRegister"];
             tabGame = tbControl.TabPages["tbpGame"];
-            tabGamemode = tbControl.TabPages["tbpChooseGamemode"];
             tabLeaderboard = tbControl.TabPages["tbpLeaderboard"];
             tabAdministrator = tbControl.TabPages["tbpAdministrator"];
 
             // Hide tabs that should only appear after login
-            // tbControl.TabPages.Remove(tabGame);
+            tbControl.TabPages.Remove(tabGame);
             tbControl.TabPages.Remove(tabLeaderboard);
             tbControl.TabPages.Remove(tabAdministrator);
-            tbControl.TabPages.Remove(tabGamemode);
-            tbControl.TabPages.Remove(tabGame);
 
-            // Start on the Register tab
-            tbControl.SelectedTab = tabRegister;
+            // Start on the Login tab
+            tbControl.SelectedTab = tabLogin;
 
             // Keep your existing timer and answer button setup
             tmrGame.Interval = 1000;
             gameTime = 60;
-            lblTimer.Text = "Time: " + gameTime;
-            btnTriangle.Click += CheckAnswer;
-            btnCircle.Click += CheckAnswer;
-            btnDiamond.Click += CheckAnswer;
-            btnSquare.Click += CheckAnswer;
+            btnAnswerOne.Click += CheckAnswer;
+            btnAnswerTwo.Click += CheckAnswer;
+            btnAnswerThree.Click += CheckAnswer;
+            btnAnswerFour.Click += CheckAnswer;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           tbpAdministrator.Visible = false;
+            tbpAdministrator.Visible = false;
+        }
+
+        private void btnRegisterHere_Click(object sender, EventArgs e)
+        { 
+            //Changing to Login Tab
+            tbControl.SelectedIndex = 1;            
+        }
+
+        private void btnLoginHere_Click(object sender, EventArgs e)
+        {
+            //Changing to Register Tab
+            tbControl.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -85,7 +97,7 @@ namespace QuizMaster
         /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string playername = tbxLogin.Text.Trim().ToLower();
+            string playername = tbxLoginName.Text.Trim().ToLower();
             string password = tbxLoginPassword.Text.Trim();
 
             if (playername == "" || password == "")
@@ -116,9 +128,9 @@ namespace QuizMaster
                         {
                             bool isAdmin = Convert.ToBoolean(result);
 
-                            // Show gamemodes and leaderboard tabs
-                            if (!tbControl.TabPages.Contains(tabGamemode))
-                                tbControl.TabPages.Add(tabGamemode);
+                            // Show game and leaderboard tabs
+                            if (!tbControl.TabPages.Contains(tabGame))
+                                tbControl.TabPages.Add(tabGame);
 
                             if (!tbControl.TabPages.Contains(tabLeaderboard))
                                 tbControl.TabPages.Add(tabLeaderboard);
@@ -134,11 +146,12 @@ namespace QuizMaster
                                 tbControl.TabPages.Remove(tabAdministrator);
                             }
 
+                            
 
-                            this.ClientSize = new Size(600, 350);
-                            this.CenterToScreen();
-                            // Open the gamemodes tab
-                            tbControl.SelectedTab = tabGamemode;
+                            // Open the Game tab
+                            tbControl.SelectedTab = tabGame;
+
+                            ShowGameModeSelection();
 
                             MessageBox.Show("Logged in successfully!");
                         }
@@ -161,11 +174,10 @@ namespace QuizMaster
         /// </summary>
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            tbControl.SelectedIndex = 1;
-            string playername = tbxRegister.Text.Trim();
+            string playername = tbxRegisterName.Text.Trim();
             string password = tbxRegisterPassword.Text.Trim();
 
-            if (playername == "" || password == "")
+            if(playername == "" || password == "")
             {
                 MessageBox.Show("All fields must be filled in to proceed");
                 return;
@@ -179,15 +191,15 @@ namespace QuizMaster
                     using (conn)
                     {
                         conn.Open();
-                        string query = "INSERT INTO login (PlayerName, Password, IsAdmin) " + "VALUES (@PlayerName, @Password, @IsAdmin)";
+                        string query = "INSERT INTO login (PlayerName, Password, IsAdmin) " +"VALUES (@PlayerName, @Password, @IsAdmin)";
                         MySqlCommand cmd = new MySqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@PlayerName", playername.ToLower());
-                        cmd.Parameters.AddWithValue("@Password", password);
+                        cmd.Parameters.AddWithValue ("@Password", password);
                         cmd.Parameters.AddWithValue("@IsAdmin", cbxIsAdmin.Checked);
 
-                        int status = cmd.ExecuteNonQuery();
+                        int status =cmd.ExecuteNonQuery();
 
-                        if (status > 0)
+                        if(status > 0)
                         {
                             MessageBox.Show("Account created succesfully!");
                             conn.Close();
@@ -195,42 +207,90 @@ namespace QuizMaster
                         }
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex) 
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
         }
 
-        private void btnGamemodeGames_Click_1(object sender, EventArgs e)
+        private void btnGameModeOne_Click(object sender, EventArgs e)
         {
+            pnlChooseGameMode.Visible = false;
+            pnlGame.Visible = true;
+
             currentTime = gameTime;
             GetAllQuestions();
-            GamemodeGames();
-            StartQuiz(); ;
+            GameModeOne();
+            StartQuiz(); 
+
+            pnlGame.Visible = true;
+
+            pnlGame.Dock = DockStyle.None;
+            pnlGame.Size = new Size(600, 370);
+            pnlGame.Location = new Point(10, 0);
+
+            this.ClientSize = new Size(500, 400);
         }
 
-        private void btnGamemodeStandard_Click(object sender, EventArgs e)
+        private void btnGameModeTwo_Click(object sender, EventArgs e)
         {
+            pnlChooseGameMode.Visible = false;
+            pnlGame.Visible = true;
 
             currentTime = gameTime;
             GetAllQuestions();
-            GamemodeStandard();
+            GameModeTwo();
             StartQuiz();
+
+            pnlGame.Visible = true;
+
+            pnlGame.Dock = DockStyle.None;
+            pnlGame.Size = new Size(600, 370);
+            pnlGame.Location = new Point(10, 0);
+
+            this.ClientSize = new Size(500, 400);
         }
 
-        private void btnGamemodeBooks_Click(object sender, EventArgs e)
+        private void btnGameModeThree_Click(object sender, EventArgs e)
         {
+            pnlChooseGameMode.Visible = false;
+            pnlGame.Visible = true;
+
             currentTime = gameTime;
             GetAllQuestions();
-            GamemodeBooks();
+            GameModeThree();
             StartQuiz();
+
+            pnlGame.Visible = true;
+
+            pnlGame.Dock = DockStyle.None;
+            pnlGame.Size = new Size(600, 370);
+            pnlGame.Location = new Point(10, 0);
+
+            this.ClientSize = new Size(500, 400);
         }
-        private void btnGameModeSpecial_Click(object sender, EventArgs e)
+
+        private void btnGameModeFour_Click(object sender, EventArgs e)
         {
-            SpecialQuiz specialQuizForm = new SpecialQuiz(tbxLogin.Text.Trim());
-            specialQuizForm.ShowDialog();
+            SpecialQuiz specialQuiz = new SpecialQuiz(tbxLoginName.Text.Trim());
+
+            specialQuiz.ShowDialog();
         }
+
+        private void ShowGameModeSelection()
+        {
+            pnlChooseGameMode.Dock = DockStyle.None;
+            pnlChooseGameMode.Size = new Size(320, 370);
+            pnlChooseGameMode.Location = new Point(10, 0);
+            pnlChooseGameMode.Visible = true;
+
+            pnlGame.Visible = false;
+
+            this.ClientSize = new Size(350, 400);
+            this.CenterToScreen();
+        }
+
         private void StartQuiz()
         {
             if (currentQuestions == null || currentQuestions.Count == 0)
@@ -242,11 +302,28 @@ namespace QuizMaster
             ShuffleList();
 
             currentQuestion = 0;
+            isSpecialQuestion = false;
+
+            // Randomly choose a special question from the first 20 questions
+            int questionsToChooseFrom = Math.Min(20, currentQuestions.Count);
+            specialQuestionIndex = random.Next(questionsToChooseFrom);
+
             score = 0;
             currentTime = gameTime;
             questionTime = 5;
             hasSkipped = false;
+
+            hasUsedFiftyFifty = false;
+            btnFiftyFifty.Enabled = true;
             btnSkipQuestion.Visible = true;
+            btnSkipQuestion.Enabled = true;
+
+            // Reset both timer labels
+            lblTimer.ForeColor = Color.White;
+            lblQuestionTime.ForeColor = Color.White;
+
+            lblTimer.Text = "Time: " + currentTime;
+            lblQuestionTime.Text = "Question time: " + questionTime;
 
             DisplayQuestion();
             tmrGame.Start();
@@ -267,17 +344,17 @@ namespace QuizMaster
             }
         }
 
-        private void GamemodeGames()
-        {
-            currentQuestions = questionList.Where(q => q.GetCategory() == "Games").ToList();
-        }
-
-        private void GamemodeStandard()
+        private void GameModeOne()
         {
             currentQuestions = questionList.ToList();
         }
 
-        private void GamemodeBooks()
+        private void GameModeTwo()
+        {
+            currentQuestions = questionList.Where(q => q.GetCategory() == "Games").ToList();
+        }
+
+        private void GameModeThree()
         {
             currentQuestions = questionList.Where(q => q.GetCategory() == "Books").ToList();
         }
@@ -328,32 +405,54 @@ namespace QuizMaster
             }
         }
 
-
         private void DisplayQuestion()
         {
-            if (currentQuestions == null || currentQuestions.Count == 0)
+            //get the current question
+            Question q = currentQuestions[currentQuestion];
+
+            // Check whether this is the randomly selected special question
+            isSpecialQuestion = currentQuestion == specialQuestionIndex;
+
+            if (isSpecialQuestion)
             {
-                MessageBox.Show("No Questions available!");
-                return;
+                lblQuestion.Text = "*** SPECIAL QUESTION! ***\r\n" + q.GetQuestion();
+
+                // Make the question stand out
+                lblQuestion.BackColor = Color.Gold;
+                lblQuestion.ForeColor = Color.DarkRed;
+                lblQuestion.Font = new Font(lblQuestion.Font, FontStyle.Bold);
+
+                // Play a sound when the special question appears
+                SoundPlayer sp = new SoundPlayer(Properties.Resources.special_sound);
+                sp.Play();
+            }
+            else
+            {
+                lblQuestion.Text = q.GetQuestion();
+
+                // Restore the normal appearance
+                lblQuestion.BackColor = Color.Transparent;
+                lblQuestion.ForeColor = Color.White;
+                lblQuestion.Font = new Font(lblQuestion.Font, FontStyle.Regular);
             }
 
-            // Get the current question
-            Question current = currentQuestions[currentQuestion];
+            // Enable all answer buttons for the new question(for Fifty-Fifty logic)
+            btnAnswerOne.Enabled = true;
+            btnAnswerTwo.Enabled = true;
+            btnAnswerThree.Enabled = true;
+            btnAnswerFour.Enabled = true;
 
-            // Display question
-            lblQuestion.Text = current.GetQuestion();
-
-            // Collect all four answers
+            //Put all 4 answers into a list
             List<string> answers = new List<string>
-    {
-        current.GetCorrectAnswer(),
-        current.GetFalseAnswerOne(),
-        current.GetFalseAnswerTwo(),
-        current.GetFalseAnswerThree()
-    };
+            {
+                q.GetCorrectAnswer(),
+                q.GetFalseAnswerOne(),
+                q.GetFalseAnswerTwo(),
+                q.GetFalseAnswerThree(),
+            };
 
-            // Shuffle the answers
-            for (int i = answers.Count - 1; i > 0; i--)
+            //Shuffle all the answers 
+            for(int i = answers.Count - 1; i >0;  i--)
             {
                 int j = random.Next(i + 1);
 
@@ -362,65 +461,59 @@ namespace QuizMaster
                 answers[j] = temp;
             }
 
-            btnTriangle.Text = answers[0];
-            btnCircle.Text = answers[1];
-            btnDiamond.Text = answers[2];
-            btnSquare.Text = answers[3];
-
-            btnTriangle.Enabled = true;
-            btnCircle.Enabled = true;
-            btnDiamond.Enabled = true;
-            btnSquare.Enabled = true;
-
-            questionTime = 5;
-
-            lblTimer.Text = "Time: " + currentTime;
-            lblQuestionTime.Text = "Question time: " + questionTime;
-
-            lblTimer.ForeColor = Color.White;
-            lblQuestionTime.ForeColor = Color.White;
-
-            hasUsed5050 = false;
-            btn5050.Enabled = true;
-
-            btnSkipQuestion.Visible = true;
-            btnSkipQuestion.Enabled = !hasSkipped;
+            //Assign the shuffles answers to the buttons
+            btnAnswerOne.Text = answers[0];
+            btnAnswerTwo.Text = answers[1];
+            btnAnswerThree.Text = answers[2];
+            btnAnswerFour.Text = answers[3];
         }
-
 
         private void CheckAnswer(object sender, EventArgs e)
         {
+            // Pause the game timer while showing messages
             tmrGame.Stop();
+
             Button clickedButton = sender as Button;
 
-            //Get the correct answer for this question
             string correctAnswer = currentQuestions[currentQuestion].GetCorrectAnswer();
 
-            //checked the clicked button
             if (clickedButton.Text == correctAnswer)
             {
-                MessageBox.Show("Correct!");
                 score++;
+
+                if (isSpecialQuestion)
+                {
+                    score += bonusPoints;
+
+                    MessageBox.Show("Special question correct! You earned 5 bonus points!");
+                }
+                else
+                {
+                    MessageBox.Show("Correct!");
+                }
             }
             else
             {
                 MessageBox.Show("Wrong answer");
             }
 
-            // Move to the next question
             currentQuestion++;
 
-            // Check if there are more questions
             if (currentQuestion < currentQuestions.Count)
             {
                 questionTime = 5;
+                lblQuestionTime.Text = "Question time: " + questionTime;
+
                 DisplayQuestion();
+
+                // Resume the timer after the message box is closed
                 tmrGame.Start();
             }
             else
             {
-                tmrGame.Stop();
+                SaveScore();
                 MessageBox.Show("Quiz completed!");
+                EndGame();
             }
         }
 
@@ -428,39 +521,57 @@ namespace QuizMaster
         {
             currentTime--;
             questionTime--;
-            lblTimer.Text = "Time:" + currentTime;
 
+            // Update overall game timer
+            lblTimer.Text = "Time: " + currentTime;
+
+            if (currentTime < 10)
+            {
+                lblTimer.ForeColor = Color.Red;
+            }
+            else
+            {
+                lblTimer.ForeColor = Color.White;
+            }
+
+            // Update question timer
+            lblQuestionTime.Text = "Question time: " + questionTime;
+
+            // Check if overall game time has run out
             if (currentTime <= 0)
             {
                 tmrGame.Stop();
                 SaveScore();
-                MessageBox.Show("Time''s up");
+                MessageBox.Show("Time's up!");
                 EndGame();
                 return;
             }
 
+            // Check if question time has run out
             if (questionTime <= 0)
             {
                 currentQuestion++;
-                //check to see if there are still questions
+
                 if (currentQuestion < currentQuestions.Count)
                 {
                     questionTime = 5;
+                    lblQuestionTime.Text = "Question time: " + questionTime;
+
                     DisplayQuestion();
                 }
                 else
                 {
                     tmrGame.Stop();
                     SaveScore();
+                    MessageBox.Show("Quiz completed!");
                     EndGame();
-                    MessageBox.Show("Quiz Completed!");
                 }
             }
         }
 
         private void SaveScore()
         {
-            string playerName = tbxLogin.Text.Trim();
+            string playerName = tbxLoginName.Text.Trim();
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -502,19 +613,12 @@ namespace QuizMaster
 
         private void tbControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tbControl.SelectedTab == tabLogin ||
-                tbControl.SelectedTab == tabRegister)
-            {
-                this.ClientSize = new Size(300, 350);
-                this.CenterToScreen();
-            }
-
-            if (tbControl.SelectedTab == tabLeaderboard)
+            if (tbControl.SelectedTab == tbpLeaderboard)
             {
                 LoadLeaderboard();
             }
-
-            if (tbControl.SelectedTab == tabAdministrator)
+           
+            if(tbControl.SelectedTab == tbpAdministrator)
             {
                 LoadQuestions();
                 LoadUsers();
@@ -530,19 +634,20 @@ namespace QuizMaster
             }
 
             hasSkipped = true;
-
             currentQuestion++;
 
             if (currentQuestion < currentQuestions.Count)
             {
                 questionTime = 5;
+                lblQuestionTime.Text = "Question time: " + questionTime;
                 DisplayQuestion();
             }
             else
             {
                 tmrGame.Stop();
                 SaveScore();
-                MessageBox.Show("Quiz Completed!");
+                MessageBox.Show("Quiz completed!");
+                EndGame();
             }
 
             btnSkipQuestion.Enabled = false;
@@ -567,75 +672,11 @@ namespace QuizMaster
             }
         }
 
-        private void LoadUsers()
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-
-                string query =
-                    "SELECT PlayerID, PlayerName, IsAdmin FROM login";
-
-                using (MySqlDataAdapter adapter =
-                    new MySqlDataAdapter(query, conn))
-                {
-                    DataTable table = new DataTable();
-                    adapter.Fill(table);
-
-                    dgvUsers.DataSource = table;
-                }
-            }
-        }
-
-        private void EndGame()
-        {
-            // Stop the game timer
-            tmrGame.Stop();
-
-            // Reset the game timer and question timer
-            currentTime = gameTime;
-            questionTime = 5;
-
-            // Reset the question index and score
-            currentQuestion = 0;
-            score = 0;
-            hasSkipped = false;
-
-            // Show the skip button again for the next game
-            btnSkipQuestion.Visible = true;
-
-            // Reset the timer label
-            lblTimer.Text = "Time: " + gameTime;
-
-            // Set the form size to the game mode selection size
-            this.ClientSize = new Size(600, 300);
-            this.CenterToScreen();
-        }
-
         private void btnAddQuestion_Click(object sender, EventArgs e)
         {
             AddQuestionForm addQuestionForm = new AddQuestionForm();
 
             addQuestionForm.ShowDialog();
-
-            LoadQuestions();
-        }
-
-        private void btnEditQuestion_Click(object sender, EventArgs e)
-        {
-
-            if (dgvQuestions.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a question to edit.");
-                return;
-            }
-
-            int questionId = Convert.ToInt32(
-                dgvQuestions.SelectedRows[0].Cells["QuestionID"].Value
-            );
-
-            editQuestionForm form = new editQuestionForm(questionId);
-            form.ShowDialog();
 
             LoadQuestions();
         }
@@ -683,31 +724,45 @@ namespace QuizMaster
             LoadQuestions();
         }
 
-        private void btnAddUser_Click(object sender, EventArgs e)
+        private void btnEditQuestion_Click(object sender, EventArgs e)
         {
-            addUserForm form = new addUserForm();
-            form.ShowDialog();
 
-            LoadUsers();
-        }
-
-        private void btnEditUser_Click(object sender, EventArgs e)
-        {
-            if (dgvUsers.SelectedRows.Count == 0)
+            if (dgvQuestions.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Please select a user to edit.");
+                MessageBox.Show("Please select a question to edit.");
                 return;
             }
 
-            int playerId = Convert.ToInt32(
-                dgvUsers.SelectedRows[0].Cells["PlayerID"].Value
+            int questionId = Convert.ToInt32(
+                dgvQuestions.SelectedRows[0].Cells["QuestionID"].Value
             );
 
-            editUserForm form = new editUserForm(playerId);
+            editQuestionForm form = new editQuestionForm(questionId);
             form.ShowDialog();
 
-            LoadUsers();
+            LoadQuestions();
         }
+
+        private void LoadUsers()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query =
+                    "SELECT PlayerID, PlayerName, IsAdmin FROM login";
+
+                using (MySqlDataAdapter adapter =
+                    new MySqlDataAdapter(query, conn))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    dgvUsers.DataSource = table;
+                }
+            }
+        }
+
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
@@ -751,11 +806,63 @@ namespace QuizMaster
             LoadUsers();
         }
 
-        private void btn5050_Click(object sender, EventArgs e)
+        private void btnAddUser_Click(object sender, EventArgs e)
         {
+            addUserForm form = new addUserForm();
+            form.ShowDialog();
 
+            LoadUsers();
+        }
+
+        private void btnEditUser_Click(object sender, EventArgs e)
+        {
+            if (dgvUsers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a user to edit.");
+                return;
+            }
+
+            int playerId = Convert.ToInt32(
+                dgvUsers.SelectedRows[0].Cells["PlayerID"].Value
+            );
+
+            editUserForm form = new editUserForm(playerId);
+            form.ShowDialog();
+
+            LoadUsers();
+        }
+
+        private void EndGame()
+        {
+            tmrGame.Stop();
+
+            pnlGame.Visible = false;
+
+            pnlChooseGameMode.Dock = DockStyle.None;
+            pnlChooseGameMode.Size = new Size(320, 370);
+            pnlChooseGameMode.Location = new Point(10, 0);
+            pnlChooseGameMode.Visible = true;
+
+            currentTime = gameTime;
+            questionTime = 5;
+            lblQuestionTime.Text = "Question time: 5";
+            currentQuestion = 0;
+            score = 0;
+            hasSkipped = false;
+
+            btnSkipQuestion.Visible = true;
+            btnSkipQuestion.Enabled = true;
+
+            lblTimer.Text = "Time: " + gameTime;
+
+            this.ClientSize = new Size(350, 400);
+            this.CenterToScreen();
+        }
+
+        private void btnFiftyFifty_Click(object sender, EventArgs e)
+        {
             // Check if the joker has already been used
-            if (hasUsed5050)
+            if (hasUsedFiftyFifty)
             {
                 return;
             }
@@ -767,10 +874,10 @@ namespace QuizMaster
             // Put all four answer buttons into a list
             List<Button> answerButtons = new List<Button>
             {
-                btnTriangle,
-                btnCircle,
-                btnDiamond,
-                btnSquare
+                btnAnswerOne,
+                btnAnswerTwo,
+                btnAnswerThree,
+                btnAnswerFour
             };
 
             // Find the button containing the correct answer
@@ -797,8 +904,9 @@ namespace QuizMaster
             }
 
             // Mark the joker as used
-            hasUsed5050 = true;
-            btn5050.Enabled = false;
+            hasUsedFiftyFifty = true;
+            btnFiftyFifty.Enabled = false;
         }
+
     }
 }

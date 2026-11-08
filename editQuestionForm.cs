@@ -21,6 +21,7 @@ namespace QuizMaster
         {
             InitializeComponent();
             questionId = id;
+
             LoadQuestion();
         }
 
@@ -46,24 +47,24 @@ namespace QuizMaster
                     {
                         if (reader.Read())
                         {
-                            tbxQuestion.Text = reader["Question"].ToString();
-                            tbxCorrectAnswer.Text = reader["CorrectAnswer"].ToString();
-                            tbxFalseOne.Text = reader["FalseAnswerOne"].ToString();
-                            tbxFalseTwo.Text = reader["FalseAnswerTwo"].ToString();
-                            tbxFalseThree.Text = reader["FalseAnswerThree"].ToString();
+                            txtQuestion.Text = reader["Question"].ToString();
+                            txtCorrectAnswer.Text = reader["CorrectAnswer"].ToString();
+                            txtFalseAnswerOne.Text = reader["FalseAnswerOne"].ToString();
+                            txtFalseAnswerTwo.Text = reader["FalseAnswerTwo"].ToString();
+                            txtFalseAnswerThree.Text = reader["FalseAnswerThree"].ToString();
                         }
                     }
                 }
             }
         }
 
-        private void btnSaveQuestion_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbxQuestion.Text) ||
-               string.IsNullOrWhiteSpace(tbxCorrectAnswer.Text) ||
-               string.IsNullOrWhiteSpace(tbxFalseOne.Text) ||
-               string.IsNullOrWhiteSpace(tbxFalseTwo.Text) ||
-               string.IsNullOrWhiteSpace(tbxFalseThree.Text))
+            if (string.IsNullOrWhiteSpace(txtQuestion.Text) ||
+       string.IsNullOrWhiteSpace(txtCorrectAnswer.Text) ||
+       string.IsNullOrWhiteSpace(txtFalseAnswerOne.Text) ||
+       string.IsNullOrWhiteSpace(txtFalseAnswerTwo.Text) ||
+       string.IsNullOrWhiteSpace(txtFalseAnswerThree.Text))
             {
                 MessageBox.Show("Please fill in all fields.");
                 return;
@@ -85,11 +86,11 @@ namespace QuizMaster
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Question", tbxQuestion.Text);
-                    cmd.Parameters.AddWithValue("@CorrectAnswer", tbxCorrectAnswer.Text);
-                    cmd.Parameters.AddWithValue("@FalseAnswerOne", tbxFalseOne.Text);
-                    cmd.Parameters.AddWithValue("@FalseAnswerTwo", tbxFalseTwo.Text);
-                    cmd.Parameters.AddWithValue("@FalseAnswerThree", tbxFalseThree.Text);
+                    cmd.Parameters.AddWithValue("@Question", txtQuestion.Text);
+                    cmd.Parameters.AddWithValue("@CorrectAnswer", txtCorrectAnswer.Text);
+                    cmd.Parameters.AddWithValue("@FalseAnswerOne", txtFalseAnswerOne.Text);
+                    cmd.Parameters.AddWithValue("@FalseAnswerTwo", txtFalseAnswerTwo.Text);
+                    cmd.Parameters.AddWithValue("@FalseAnswerThree", txtFalseAnswerThree.Text);
                     cmd.Parameters.AddWithValue("@QuestionID", questionId);
 
                     cmd.ExecuteNonQuery();
