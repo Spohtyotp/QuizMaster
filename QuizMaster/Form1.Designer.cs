@@ -41,6 +41,8 @@
             this.tbxLogin = new System.Windows.Forms.TextBox();
             this.tbpGame = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn5050 = new System.Windows.Forms.Button();
+            this.lblQuestionTime = new System.Windows.Forms.Label();
             this.btnSkipQuestion = new System.Windows.Forms.Button();
             this.btnSquare = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
@@ -71,8 +73,6 @@
             this.tmrGame = new System.Windows.Forms.Timer(this.components);
             this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.lblQuestionTime = new System.Windows.Forms.Label();
-            this.btn5050 = new System.Windows.Forms.Button();
             this.tbControl.SuspendLayout();
             this.tbpRegister.SuspendLayout();
             this.tbpLogin.SuspendLayout();
@@ -164,7 +164,7 @@
             this.tbpLogin.Location = new System.Drawing.Point(4, 25);
             this.tbpLogin.Name = "tbpLogin";
             this.tbpLogin.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpLogin.Size = new System.Drawing.Size(343, 358);
+            this.tbpLogin.Size = new System.Drawing.Size(741, 358);
             this.tbpLogin.TabIndex = 1;
             this.tbpLogin.Text = "login";
             this.tbpLogin.UseVisualStyleBackColor = true;
@@ -220,6 +220,30 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(744, 355);
             this.panel1.TabIndex = 12;
+            // 
+            // btn5050
+            // 
+            this.btn5050.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
+            this.btn5050.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btn5050.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn5050.Location = new System.Drawing.Point(608, 57);
+            this.btn5050.Name = "btn5050";
+            this.btn5050.Size = new System.Drawing.Size(117, 37);
+            this.btn5050.TabIndex = 18;
+            this.btn5050.Text = "50/50";
+            this.btn5050.UseVisualStyleBackColor = true;
+            this.btn5050.Click += new System.EventHandler(this.btn5050_Click);
+            // 
+            // lblQuestionTime
+            // 
+            this.lblQuestionTime.AutoSize = true;
+            this.lblQuestionTime.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
+            this.lblQuestionTime.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblQuestionTime.Location = new System.Drawing.Point(23, 106);
+            this.lblQuestionTime.Name = "lblQuestionTime";
+            this.lblQuestionTime.Size = new System.Drawing.Size(69, 31);
+            this.lblQuestionTime.TabIndex = 17;
+            this.lblQuestionTime.Text = "label";
             // 
             // btnSkipQuestion
             // 
@@ -337,7 +361,7 @@
             this.btnGameModeSpecial.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnGameModeSpecial.Location = new System.Drawing.Point(381, 107);
             this.btnGameModeSpecial.Name = "btnGameModeSpecial";
-            this.btnGameModeSpecial.Size = new System.Drawing.Size(137, 43);
+            this.btnGameModeSpecial.Size = new System.Drawing.Size(145, 43);
             this.btnGameModeSpecial.TabIndex = 3;
             this.btnGameModeSpecial.Text = "Special";
             this.btnGameModeSpecial.UseVisualStyleBackColor = true;
@@ -348,7 +372,7 @@
             this.btnGamemodeBooks.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnGamemodeBooks.Location = new System.Drawing.Point(381, 43);
             this.btnGamemodeBooks.Name = "btnGamemodeBooks";
-            this.btnGamemodeBooks.Size = new System.Drawing.Size(137, 43);
+            this.btnGamemodeBooks.Size = new System.Drawing.Size(145, 43);
             this.btnGamemodeBooks.TabIndex = 2;
             this.btnGamemodeBooks.Text = "Books";
             this.btnGamemodeBooks.UseVisualStyleBackColor = true;
@@ -357,9 +381,9 @@
             // btnGamemodeStandard
             // 
             this.btnGamemodeStandard.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnGamemodeStandard.Location = new System.Drawing.Point(168, 43);
+            this.btnGamemodeStandard.Location = new System.Drawing.Point(161, 43);
             this.btnGamemodeStandard.Name = "btnGamemodeStandard";
-            this.btnGamemodeStandard.Size = new System.Drawing.Size(137, 43);
+            this.btnGamemodeStandard.Size = new System.Drawing.Size(144, 43);
             this.btnGamemodeStandard.TabIndex = 1;
             this.btnGamemodeStandard.Text = "Standard";
             this.btnGamemodeStandard.UseVisualStyleBackColor = true;
@@ -368,9 +392,9 @@
             // btnGamemodeGames
             // 
             this.btnGamemodeGames.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnGamemodeGames.Location = new System.Drawing.Point(168, 107);
+            this.btnGamemodeGames.Location = new System.Drawing.Point(161, 107);
             this.btnGamemodeGames.Name = "btnGamemodeGames";
-            this.btnGamemodeGames.Size = new System.Drawing.Size(137, 43);
+            this.btnGamemodeGames.Size = new System.Drawing.Size(144, 43);
             this.btnGamemodeGames.TabIndex = 0;
             this.btnGamemodeGames.Text = "Games";
             this.btnGamemodeGames.UseVisualStyleBackColor = true;
@@ -542,30 +566,6 @@
             this.mySqlCommand1.Connection = null;
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
-            // 
-            // lblQuestionTime
-            // 
-            this.lblQuestionTime.AutoSize = true;
-            this.lblQuestionTime.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.lblQuestionTime.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblQuestionTime.Location = new System.Drawing.Point(23, 106);
-            this.lblQuestionTime.Name = "lblQuestionTime";
-            this.lblQuestionTime.Size = new System.Drawing.Size(69, 31);
-            this.lblQuestionTime.TabIndex = 17;
-            this.lblQuestionTime.Text = "label";
-            // 
-            // btn5050
-            // 
-            this.btn5050.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
-            this.btn5050.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btn5050.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn5050.Location = new System.Drawing.Point(608, 57);
-            this.btn5050.Name = "btn5050";
-            this.btn5050.Size = new System.Drawing.Size(117, 37);
-            this.btn5050.TabIndex = 18;
-            this.btn5050.Text = "50/50";
-            this.btn5050.UseVisualStyleBackColor = true;
-            this.btn5050.Click += new System.EventHandler(this.btn5050_Click);
             // 
             // Form1
             // 

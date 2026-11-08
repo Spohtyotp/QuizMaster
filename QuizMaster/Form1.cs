@@ -116,9 +116,9 @@ namespace QuizMaster
                         {
                             bool isAdmin = Convert.ToBoolean(result);
 
-                            // Show game and leaderboard tabs
-                            if (!tbControl.TabPages.Contains(tabGame))
-                                tbControl.TabPages.Add(tabGame);
+                            // Show gamemodes and leaderboard tabs
+                            if (!tbControl.TabPages.Contains(tabGamemode))
+                                tbControl.TabPages.Add(tabGamemode);
 
                             if (!tbControl.TabPages.Contains(tabLeaderboard))
                                 tbControl.TabPages.Add(tabLeaderboard);
@@ -137,8 +137,8 @@ namespace QuizMaster
 
                             this.ClientSize = new Size(600, 350);
                             this.CenterToScreen();
-                            // Open the Game tab
-                            tbControl.SelectedTab = tabGame;
+                            // Open the gamemodes tab
+                            tbControl.SelectedTab = tabGamemode;
 
                             MessageBox.Show("Logged in successfully!");
                         }
@@ -328,6 +328,7 @@ namespace QuizMaster
             }
         }
 
+
         private void DisplayQuestion()
         {
             if (currentQuestions == null || currentQuestions.Count == 0)
@@ -336,35 +337,56 @@ namespace QuizMaster
                 return;
             }
 
-            ShuffleList();
+            // Get the current question
+            Question current = currentQuestions[currentQuestion];
 
-            currentQuestion = 0;
-            isSpecialQuestion = false;
+            // Display question
+            lblQuestion.Text = current.GetQuestion();
 
-            // Randomly choose a special question from the first 20 questions
-            int questionsToChooseFrom = Math.Min(20, currentQuestions.Count);
-            specialQuestionIndex = random.Next(questionsToChooseFrom);
+            // Collect all four answers
+            List<string> answers = new List<string>
+    {
+        current.GetCorrectAnswer(),
+        current.GetFalseAnswerOne(),
+        current.GetFalseAnswerTwo(),
+        current.GetFalseAnswerThree()
+    };
 
-            score = 0;
-            currentTime = gameTime;
+            // Shuffle the answers
+            for (int i = answers.Count - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+
+                string temp = answers[i];
+                answers[i] = answers[j];
+                answers[j] = temp;
+            }
+
+            btnTriangle.Text = answers[0];
+            btnCircle.Text = answers[1];
+            btnDiamond.Text = answers[2];
+            btnSquare.Text = answers[3];
+
+            btnTriangle.Enabled = true;
+            btnCircle.Enabled = true;
+            btnDiamond.Enabled = true;
+            btnSquare.Enabled = true;
+
             questionTime = 5;
-            hasSkipped = false;
-
-            hasUsed5050 = false;
-            btn5050.Enabled = true;
-            btnSkipQuestion.Visible = true;
-            btnSkipQuestion.Enabled = true;
-
-            // Reset both timer labels
-            lblTimer.ForeColor = Color.White;
-            lblQuestionTime.ForeColor = Color.White;
 
             lblTimer.Text = "Time: " + currentTime;
             lblQuestionTime.Text = "Question time: " + questionTime;
 
-            DisplayQuestion();
-            tmrGame.Start();
+            lblTimer.ForeColor = Color.White;
+            lblQuestionTime.ForeColor = Color.White;
+
+            hasUsed5050 = false;
+            btn5050.Enabled = true;
+
+            btnSkipQuestion.Visible = true;
+            btnSkipQuestion.Enabled = !hasSkipped;
         }
+
 
         private void CheckAnswer(object sender, EventArgs e)
         {
