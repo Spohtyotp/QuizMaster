@@ -36,6 +36,7 @@ namespace QuizMaster
 
         TabPage tabLogin;
         TabPage tabRegister;
+        TabPage tabGamemodes;
         TabPage tabGame;
         TabPage tabLeaderboard;
         TabPage tabAdministrator;
@@ -52,11 +53,13 @@ namespace QuizMaster
             // Remember the existing tabs
             tabLogin = tbControl.TabPages["tbpLogin"];
             tabRegister = tbControl.TabPages["tbpRegister"];
+            tabGamemodes = tbControl.TabPages["tbpGamemodes"];
             tabGame = tbControl.TabPages["tbpGame"];
             tabLeaderboard = tbControl.TabPages["tbpLeaderboard"];
             tabAdministrator = tbControl.TabPages["tbpAdministrator"];
 
             // Hide tabs that should only appear after login
+            tbControl.TabPages.Remove(tabGamemodes);
             tbControl.TabPages.Remove(tabGame);
             tbControl.TabPages.Remove(tabLeaderboard);
             tbControl.TabPages.Remove(tabAdministrator);
@@ -129,8 +132,8 @@ namespace QuizMaster
                             bool isAdmin = Convert.ToBoolean(result);
 
                             // Show game and leaderboard tabs
-                            if (!tbControl.TabPages.Contains(tabGame))
-                                tbControl.TabPages.Add(tabGame);
+                            if (!tbControl.TabPages.Contains(tabGamemodes))
+                                tbControl.TabPages.Add(tabGamemodes);
 
                             if (!tbControl.TabPages.Contains(tabLeaderboard))
                                 tbControl.TabPages.Add(tabLeaderboard);
@@ -149,9 +152,7 @@ namespace QuizMaster
                             
 
                             // Open the Game tab
-                            tbControl.SelectedTab = tabGame;
-
-                            ShowGameModeSelection();
+                            tbControl.SelectedTab = tabGamemodes;
 
                             MessageBox.Show("Logged in successfully!");
                         }
@@ -213,10 +214,17 @@ namespace QuizMaster
                 }
             }
         }
+        private void OpenGameTab()
+        {
+            if (!tbControl.TabPages.Contains(tabGame))
+                tbControl.TabPages.Add(tabGame);
+
+            tbControl.SelectedTab = tabGame;
+        }
 
         private void btnGameModeOne_Click(object sender, EventArgs e)
         {
-            pnlChooseGameMode.Visible = false;
+            OpenGameTab();
             pnlGame.Visible = true;
 
             currentTime = gameTime;
@@ -230,12 +238,12 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(500, 400);
+            this.ClientSize = new Size(850, 400);
         }
 
         private void btnGameModeTwo_Click(object sender, EventArgs e)
         {
-            pnlChooseGameMode.Visible = false;
+            OpenGameTab();
             pnlGame.Visible = true;
 
             currentTime = gameTime;
@@ -249,12 +257,12 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(500, 400);
+            this.ClientSize = new Size(850, 400);
         }
 
         private void btnGameModeThree_Click(object sender, EventArgs e)
         {
-            pnlChooseGameMode.Visible = false;
+            OpenGameTab();
             pnlGame.Visible = true;
 
             currentTime = gameTime;
@@ -268,7 +276,7 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(500, 400);
+            this.ClientSize = new Size(850, 400);
         }
 
         private void btnGameModeFour_Click(object sender, EventArgs e)
@@ -276,19 +284,6 @@ namespace QuizMaster
             SpecialQuiz specialQuiz = new SpecialQuiz(tbxLoginName.Text.Trim());
 
             specialQuiz.ShowDialog();
-        }
-
-        private void ShowGameModeSelection()
-        {
-            pnlChooseGameMode.Dock = DockStyle.None;
-            pnlChooseGameMode.Size = new Size(320, 370);
-            pnlChooseGameMode.Location = new Point(10, 0);
-            pnlChooseGameMode.Visible = true;
-
-            pnlGame.Visible = false;
-
-            this.ClientSize = new Size(350, 400);
-            this.CenterToScreen();
         }
 
         private void StartQuiz()
@@ -407,6 +402,12 @@ namespace QuizMaster
 
         private void DisplayQuestion()
         {
+
+            //Restore answer Buttons
+            btnAnswerOne.BackgroundImage = Properties.Resources.triangle;
+            btnAnswerTwo.BackgroundImage = Properties.Resources.cube;
+            btnAnswerThree.BackgroundImage = Properties.Resources.cubegreen;
+            btnAnswerFour.BackgroundImage = Properties.Resources.circle;
             //get the current question
             Question q = currentQuestions[currentQuestion];
 
@@ -838,11 +839,6 @@ namespace QuizMaster
 
             pnlGame.Visible = false;
 
-            pnlChooseGameMode.Dock = DockStyle.None;
-            pnlChooseGameMode.Size = new Size(320, 370);
-            pnlChooseGameMode.Location = new Point(10, 0);
-            pnlChooseGameMode.Visible = true;
-
             currentTime = gameTime;
             questionTime = 5;
             lblQuestionTime.Text = "Question time: 5";
@@ -900,6 +896,11 @@ namespace QuizMaster
                 if (button != incorrectButton)
                 {
                     button.Enabled = false;
+
+                    button.BackgroundImage = null;
+                    button.BackColor = Color.Gray;
+                    button.BackgroundImageLayout = ImageLayout.Stretch;
+                    button.UseVisualStyleBackColor = false;
                 }
             }
 
@@ -907,6 +908,5 @@ namespace QuizMaster
             hasUsedFiftyFifty = true;
             btnFiftyFifty.Enabled = false;
         }
-
     }
 }
