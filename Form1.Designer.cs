@@ -318,7 +318,7 @@
             this.panel3.Controls.Add(this.btnGameModeOne);
             this.panel3.Location = new System.Drawing.Point(21, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(403, 348);
+            this.panel3.Size = new System.Drawing.Size(351, 348);
             this.panel3.TabIndex = 0;
             // 
             // btnGameModeFour
@@ -326,7 +326,7 @@
             this.btnGameModeFour.BackColor = System.Drawing.Color.White;
             this.btnGameModeFour.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnGameModeFour.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnGameModeFour.Location = new System.Drawing.Point(208, 235);
+            this.btnGameModeFour.Location = new System.Drawing.Point(179, 233);
             this.btnGameModeFour.Name = "btnGameModeFour";
             this.btnGameModeFour.Size = new System.Drawing.Size(131, 40);
             this.btnGameModeFour.TabIndex = 7;
@@ -339,7 +339,7 @@
             this.btnGameModeThree.BackColor = System.Drawing.Color.White;
             this.btnGameModeThree.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnGameModeThree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnGameModeThree.Location = new System.Drawing.Point(208, 138);
+            this.btnGameModeThree.Location = new System.Drawing.Point(179, 138);
             this.btnGameModeThree.Name = "btnGameModeThree";
             this.btnGameModeThree.Size = new System.Drawing.Size(131, 40);
             this.btnGameModeThree.TabIndex = 6;
@@ -352,7 +352,7 @@
             this.btnGameModeTwo.BackColor = System.Drawing.Color.White;
             this.btnGameModeTwo.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnGameModeTwo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnGameModeTwo.Location = new System.Drawing.Point(208, 47);
+            this.btnGameModeTwo.Location = new System.Drawing.Point(179, 52);
             this.btnGameModeTwo.Name = "btnGameModeTwo";
             this.btnGameModeTwo.Size = new System.Drawing.Size(131, 40);
             this.btnGameModeTwo.TabIndex = 5;
@@ -450,12 +450,11 @@
             // 
             // lblQuestion
             // 
-            this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.lblQuestion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblQuestion.Location = new System.Drawing.Point(44, 48);
+            this.lblQuestion.Location = new System.Drawing.Point(60, 49);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(79, 26);
+            this.lblQuestion.Size = new System.Drawing.Size(626, 66);
             this.lblQuestion.TabIndex = 1;
             this.lblQuestion.Text = "label5";
             // 
@@ -555,7 +554,8 @@
             // 
             // btnDeleteUser
             // 
-            this.btnDeleteUser.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnDeleteUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnDeleteUser.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnDeleteUser.ForeColor = System.Drawing.SystemColors.Control;
             this.btnDeleteUser.Location = new System.Drawing.Point(638, 331);
             this.btnDeleteUser.Name = "btnDeleteUser";
@@ -567,7 +567,8 @@
             // 
             // btnEditUser
             // 
-            this.btnEditUser.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnEditUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnEditUser.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnEditUser.ForeColor = System.Drawing.SystemColors.Control;
             this.btnEditUser.Location = new System.Drawing.Point(521, 331);
             this.btnEditUser.Name = "btnEditUser";
@@ -579,7 +580,8 @@
             // 
             // btnAddUser
             // 
-            this.btnAddUser.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnAddUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnAddUser.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddUser.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAddUser.Location = new System.Drawing.Point(403, 331);
             this.btnAddUser.Name = "btnAddUser";
@@ -603,8 +605,8 @@
             // 
             // btnDeleteQuestion
             // 
-            this.btnDeleteQuestion.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnDeleteQuestion.Font = new System.Drawing.Font("MS Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnDeleteQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnDeleteQuestion.ForeColor = System.Drawing.SystemColors.Control;
             this.btnDeleteQuestion.Location = new System.Drawing.Point(250, 332);
             this.btnDeleteQuestion.Name = "btnDeleteQuestion";
@@ -616,8 +618,8 @@
             // 
             // btnEditQuestion
             // 
-            this.btnEditQuestion.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnEditQuestion.Font = new System.Drawing.Font("MS Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnEditQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnEditQuestion.ForeColor = System.Drawing.SystemColors.Control;
             this.btnEditQuestion.Location = new System.Drawing.Point(130, 332);
             this.btnEditQuestion.Name = "btnEditQuestion";
@@ -629,8 +631,8 @@
             // 
             // btnAddQuestion
             // 
-            this.btnAddQuestion.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAddQuestion.Font = new System.Drawing.Font("MS Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnAddQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnAddQuestion.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAddQuestion.Location = new System.Drawing.Point(18, 331);
             this.btnAddQuestion.Name = "btnAddQuestion";

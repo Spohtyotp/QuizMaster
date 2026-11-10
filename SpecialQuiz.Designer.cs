@@ -42,30 +42,31 @@
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.BackColor = System.Drawing.Color.Transparent;
-            this.lblTimer.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.lblTimer.ForeColor = System.Drawing.Color.IndianRed;
             this.lblTimer.Location = new System.Drawing.Point(12, 9);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(49, 13);
+            this.lblTimer.Size = new System.Drawing.Size(68, 22);
             this.lblTimer.TabIndex = 15;
             this.lblTimer.Text = "label5";
             // 
             // lblQuestion
             // 
-            this.lblQuestion.AutoSize = true;
             this.lblQuestion.BackColor = System.Drawing.Color.Transparent;
-            this.lblQuestion.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestion.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.lblQuestion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblQuestion.Location = new System.Drawing.Point(12, 54);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(55, 13);
+            this.lblQuestion.Size = new System.Drawing.Size(462, 44);
             this.lblQuestion.TabIndex = 9;
             this.lblQuestion.Text = "label5";
             // 
             // btnAnswerOne
             // 
-            this.btnAnswerOne.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAnswerOne.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnswerOne.BackColor = System.Drawing.Color.Transparent;
+            this.btnAnswerOne.FlatAppearance.BorderSize = 5;
+            this.btnAnswerOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnswerOne.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnAnswerOne.ForeColor = System.Drawing.Color.White;
             this.btnAnswerOne.Location = new System.Drawing.Point(118, 111);
             this.btnAnswerOne.Name = "btnAnswerOne";
@@ -76,8 +77,10 @@
             // 
             // btnAnswerFour
             // 
-            this.btnAnswerFour.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAnswerFour.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnswerFour.BackColor = System.Drawing.Color.Transparent;
+            this.btnAnswerFour.FlatAppearance.BorderSize = 5;
+            this.btnAnswerFour.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnswerFour.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnAnswerFour.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAnswerFour.Location = new System.Drawing.Point(118, 285);
             this.btnAnswerFour.Name = "btnAnswerFour";
@@ -88,9 +91,11 @@
             // 
             // btnAnswerTwo
             // 
-            this.btnAnswerTwo.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAnswerTwo.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnswerTwo.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnAnswerTwo.BackColor = System.Drawing.Color.Transparent;
+            this.btnAnswerTwo.FlatAppearance.BorderSize = 5;
+            this.btnAnswerTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnswerTwo.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAnswerTwo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAnswerTwo.Location = new System.Drawing.Point(118, 167);
             this.btnAnswerTwo.Name = "btnAnswerTwo";
             this.btnAnswerTwo.Size = new System.Drawing.Size(231, 43);
@@ -100,8 +105,10 @@
             // 
             // btnAnswerThree
             // 
-            this.btnAnswerThree.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnAnswerThree.Font = new System.Drawing.Font("MS Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnswerThree.BackColor = System.Drawing.Color.Transparent;
+            this.btnAnswerThree.FlatAppearance.BorderSize = 5;
+            this.btnAnswerThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnswerThree.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btnAnswerThree.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAnswerThree.Location = new System.Drawing.Point(118, 228);
             this.btnAnswerThree.Name = "btnAnswerThree";
@@ -118,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::QuizMaster.Properties.Resources._1e8afa2de9c4da1fbb8b0ccdbbca34f0;
+            this.BackgroundImage = global::QuizMaster.Properties.Resources.kahoot2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(486, 414);
             this.Controls.Add(this.lblTimer);
@@ -127,6 +134,7 @@
             this.Controls.Add(this.btnAnswerFour);
             this.Controls.Add(this.btnAnswerTwo);
             this.Controls.Add(this.btnAnswerThree);
+            this.DoubleBuffered = true;
             this.Name = "SpecialQuiz";
             this.Text = "SpecialQuiz";
             this.Load += new System.EventHandler(this.SpecialQuiz_Load);

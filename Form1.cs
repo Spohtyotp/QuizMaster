@@ -238,7 +238,7 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(850, 400);
+            this.ClientSize = new Size(610, 380);
         }
 
         private void btnGameModeTwo_Click(object sender, EventArgs e)
@@ -257,7 +257,7 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(850, 400);
+            this.ClientSize = new Size(610, 380);
         }
 
         private void btnGameModeThree_Click(object sender, EventArgs e)
@@ -276,7 +276,7 @@ namespace QuizMaster
             pnlGame.Size = new Size(600, 370);
             pnlGame.Location = new Point(10, 0);
 
-            this.ClientSize = new Size(850, 400);
+            this.ClientSize = new Size(610, 380);
         }
 
         private void btnGameModeFour_Click(object sender, EventArgs e)

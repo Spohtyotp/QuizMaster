@@ -51,7 +51,7 @@ namespace QuizMaster
                             txtUsername.Text =
                                 reader["PlayerName"].ToString();
 
-                            txtPassword.Text =reader["Password"].ToString();
+                            txtPassword.Text = reader["Password"].ToString();
 
                             cbxIsAdmin.Checked =
                                 Convert.ToBoolean(reader["IsAdmin"]);
@@ -106,14 +106,12 @@ namespace QuizMaster
                         "@PlayerName", txtUsername.Text.Trim().ToLower());
 
                     cmd.Parameters.AddWithValue(
-                       "@Password", txtPassword.Text);
-
-                    cmd.Parameters.AddWithValue(
                         "@IsAdmin", cbxIsAdmin.Checked);
 
                     cmd.Parameters.AddWithValue(
                         "@PlayerID", playerId);
 
+                    // Only add password if the user entered one
                     if (!string.IsNullOrWhiteSpace(txtPassword.Text))
                     {
                         cmd.Parameters.AddWithValue(
