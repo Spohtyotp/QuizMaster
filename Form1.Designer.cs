@@ -337,6 +337,7 @@
             // btnGameModeThree
             // 
             this.btnGameModeThree.BackColor = System.Drawing.Color.White;
+            this.btnGameModeThree.FlatAppearance.BorderSize = 3;
             this.btnGameModeThree.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnGameModeThree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnGameModeThree.Location = new System.Drawing.Point(179, 138);

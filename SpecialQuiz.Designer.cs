@@ -74,6 +74,7 @@
             this.btnAnswerOne.TabIndex = 10;
             this.btnAnswerOne.Text = "button1";
             this.btnAnswerOne.UseVisualStyleBackColor = false;
+            this.btnAnswerOne.Click += new System.EventHandler(this.btnAnswerOne_Click);
             // 
             // btnAnswerFour
             // 

@@ -137,7 +137,7 @@ namespace QuizMaster
             //get the current question
             Question q = currentQuestions[currentQuestion];
 
-            //display teh question
+            //display the question
             lblQuestion.Text = q.GetQuestion();
 
             //Put all 4 answers into a list

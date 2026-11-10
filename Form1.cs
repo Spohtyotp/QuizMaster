@@ -416,11 +416,11 @@ namespace QuizMaster
 
             if (isSpecialQuestion)
             {
-                lblQuestion.Text = "*** SPECIAL QUESTION! ***\r\n" + q.GetQuestion();
+                lblQuestion.Text = "This is the SPECIAL QUESTION! \r\n" + q.GetQuestion();
 
                 // Make the question stand out
-                lblQuestion.BackColor = Color.Gold;
-                lblQuestion.ForeColor = Color.DarkRed;
+                lblQuestion.BackColor = Color.Purple;
+                lblQuestion.ForeColor = Color.White;
                 lblQuestion.Font = new Font(lblQuestion.Font, FontStyle.Bold);
 
                 // Play a sound when the special question appears

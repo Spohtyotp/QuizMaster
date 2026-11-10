@@ -116,9 +116,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(66, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 22);
+            this.label3.Size = new System.Drawing.Size(127, 22);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Playername";
+            this.label3.Text = "Player name";
             // 
             // editUserForm
             // 
